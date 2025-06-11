@@ -4,10 +4,9 @@ from app.core.redis import redis_client
 import json
 
 DUMMYJSON_URL = "https://dummyjson.com/products"
-CACHE_TTL = 600  # 10 minutos
+CACHE_TTL = 600
 
 async def fetch_products(skip: int = 0, limit: int = 10, sort: Optional[str] = None, q: Optional[str] = None) -> Dict[str, Any]:
-    # No cache para listados (por paginación y filtros)
     params = {"skip": skip, "limit": limit}
     if sort:
         params["sort"] = sort

@@ -19,7 +19,7 @@ class UserRead(BaseModel):
     role: UserRole
 
 class UserLogin(BaseModel):
-    username: str
+    email: EmailStr
     password: str
 
 class Token(BaseModel):

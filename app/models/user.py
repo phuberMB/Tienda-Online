@@ -1,6 +1,7 @@
 from sqlmodel import SQLModel, Field
 from typing import Optional
 from enum import Enum
+from datetime import datetime
 
 class UserRole(str, Enum):
     cliente = "cliente"
@@ -13,4 +14,5 @@ class User(SQLModel, table=True):
     hashed_password: str
     is_active: bool = Field(default=True)
     role: UserRole = Field(default=UserRole.cliente)
-    reset_token: Optional[str] = None
+    reset_token: Optional[str] = Field(default=None, index=True)
+    reset_token_expiry: Optional[datetime] = Field(default=None)

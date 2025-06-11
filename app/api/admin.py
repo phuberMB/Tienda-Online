@@ -4,7 +4,7 @@ from app.dependencies import get_session
 from app.models.order import Order, OrderItem
 from app.models.user import User
 from app.schemas.order import OrderRead, OrderStatusUpdate, OrderStatus
-from app.api.orders import get_current_user, _attach_product_details
+from app.api.orders import get_current_user
 from typing import List, Dict
 import asyncio
 
@@ -44,7 +44,6 @@ async def _get_price(product_id: int):
     except:
         return None
 
-# Historial de pedidos con cambio de estado
 @router.patch("/orders/{order_id}/status", response_model=OrderRead)
 def update_order_status(order_id: int, status_update: OrderStatusUpdate, session: Session = Depends(get_session), current_user: User = Depends(get_current_user)):
     if current_user.role != "admin":
@@ -57,7 +56,4 @@ def update_order_status(order_id: int, status_update: OrderStatusUpdate, session
     session.commit()
     session.refresh(order)
     order.items = session.exec(select(OrderItem).where(OrderItem.order_id == order.id)).all()
-    # Attach product details (sync workaround)
-    import asyncio
-    asyncio.run(_attach_product_details(order))
     return order

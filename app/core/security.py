@@ -17,18 +17,22 @@ def verify_password(plain_password, hashed_password):
 def get_password_hash(password):
     return pwd_context.hash(password)
 
-def create_access_token(subject: str, expires_delta: Optional[timedelta] = None) -> str:
+def create_access_token(subject: str, expires_delta: Optional[timedelta] = None, extra_payload: Optional[dict] = None) -> str:
     if expires_delta is None:
         expires_delta = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     expire = datetime.utcnow() + expires_delta
     to_encode = {"exp": expire, "sub": str(subject), "type": "access"}
+    if extra_payload:
+        to_encode.update(extra_payload)
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-def create_refresh_token(subject: str, expires_delta: Optional[timedelta] = None) -> str:
+def create_refresh_token(subject: str, expires_delta: Optional[timedelta] = None, extra_payload: Optional[dict] = None) -> str:
     if expires_delta is None:
         expires_delta = timedelta(minutes=REFRESH_TOKEN_EXPIRE_MINUTES)
     expire = datetime.utcnow() + expires_delta
     to_encode = {"exp": expire, "sub": str(subject), "type": "refresh"}
+    if extra_payload:
+        to_encode.update(extra_payload)
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 def decode_token(token: str) -> Any:
