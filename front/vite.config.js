@@ -5,10 +5,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/admin': 'http://localhost:8000',
-      '/orders': 'http://localhost:8000',
-      '/auth': 'http://localhost:8000',
-      '/products': 'http://localhost:8000',
+      '/products': 'http://web:8000',
+      '/orders': 'http://web:8000',
+      '/auth': 'http://web:8000',
+      '/admin': 'http://web:8000',
     }
   }
 })
