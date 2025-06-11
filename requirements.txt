@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+sqlmodel
+pydantic[email]
+python-jose[cryptography]
+passlib[bcrypt]
+redis
+httpx
+pandas
+openpyxl
+reportlab
+python-dotenv
+psycopg2-binary

@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.env.*
+*.sqlite3
+*.db
+
+# VSCode
+.vscode/
+
+# Docker
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Exported files
+*.csv
+*.xlsx
+*.pdf
+
+# Others
+.idea/
